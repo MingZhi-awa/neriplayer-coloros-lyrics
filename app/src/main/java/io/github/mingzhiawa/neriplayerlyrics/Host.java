@@ -1,6 +1,5 @@
 package io.github.mingzhiawa.neriplayerlyrics;
 
-import android.app.ActivityThread;
 import android.content.Context;
 import android.content.pm.PackageManager;
 

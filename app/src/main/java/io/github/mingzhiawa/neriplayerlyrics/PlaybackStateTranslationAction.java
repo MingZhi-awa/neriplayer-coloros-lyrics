@@ -1,6 +1,5 @@
 package io.github.mingzhiawa.neriplayerlyrics;
 
-import android.graphics.drawable.Icon;
 import android.media.session.PlaybackState;
 
 import java.util.List;
@@ -8,18 +7,20 @@ import java.util.List;
 /**
  * Adds the public lyric-translation action to the host {@link PlaybackState}.
  *
- * <p>Bridge owns the button: it binds this action to the favorite slot and toggles the lyric
- * translation lane on the SystemUI side, so the player never has to answer the click. The player
- * only has to advertise the action, which is exactly what the documented
- * {@code PlaybackStateTranslationToggle} contract asks for.
+ * <p>Bridge owns the button: it rebinds this action to the favorite slot, hands it its own
+ * translation drawable and toggles the translation lane on the SystemUI side, so the player never
+ * answers the click. The player only has to advertise the action, which is exactly what the
+ * documented {@code PlaybackStateTranslationToggle} contract asks for.
  */
 final class PlaybackStateTranslationAction {
     static final String ACTION_TRANSLATION =
             "io.github.andrealtb.lockscreenlyrics.action.TOGGLE_TRANSLATION";
     private static final String ACTION_LABEL = "\u7ffb\u8bd1";
-    /** System icon used only as a placeholder; Bridge replaces the drawable it renders. */
-    private static final String ICON_PACKAGE = "android";
-    private static final int ICON_RESOURCE = android.R.drawable.ic_menu_sort_alphabetically;
+    /**
+     * The platform only accepts a resource id here. Bridge replaces this placeholder with its own
+     * translation drawable before the action row is drawn, so no host resource is referenced.
+     */
+    private static final int PLACEHOLDER_ICON = 0;
 
     private PlaybackStateTranslationAction() {
     }
@@ -52,13 +53,13 @@ final class PlaybackStateTranslationAction {
             PlaybackState.CustomAction action = new PlaybackState.CustomAction.Builder(
                     ACTION_TRANSLATION,
                     ACTION_LABEL,
-                    Icon.createWithResource(ICON_PACKAGE, ICON_RESOURCE))
+                    PLACEHOLDER_ICON)
                     .build();
             PlaybackState.Builder builder = new PlaybackState.Builder(state);
             builder.addCustomAction(action);
             return builder.build();
         } catch (Throwable ignored) {
-            // Contract is best-effort: a failed copy must never disturb host playback state.
+            // Best-effort: a failed copy must never disturb host playback state.
             return null;
         }
     }
