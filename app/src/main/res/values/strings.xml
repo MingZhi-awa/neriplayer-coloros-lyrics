@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">音理音理 锁屏歌词</string>
+    <string name="screen_title">音理音理 锁屏歌词增强</string>
+    <string name="screen_subtitle">ColorOS 实时歌词 · 逐字 · 翻译按钮</string>
+
+    <string name="card_status_title">运行状态</string>
+    <string name="status_module">模块入口：已随 LSPosed 加载</string>
+    <string name="status_bridge_ok">Bridge：已安装</string>
+    <string name="status_bridge_missing">Bridge：未安装，翻译按钮不会出现</string>
+    <string name="status_host_ok">音理音理：已安装</string>
+    <string name="status_host_missing">音理音理：未安装</string>
+
+    <string name="card_how_title">它做了什么</string>
+    <string name="how_body">不重建任何元数据。只在播放器进程里补两件事：向 Bridge 声明音理音理是受管播放器，从而放开 RUS 白名单、歌词入口 52 与 AOD 面板；以及在 PlaybackState 上公开 TOGGLE_TRANSLATION，让 Bridge 显示翻译按钮并渲染逐字歌词。</string>
+
+    <string name="card_tips_title">使用提示</string>
+    <string name="tips_body">一、在 LSPosed 里把作用域勾选音理音理并重启播放器。\n二、音理音理设置里打开 ColorOS 锁屏歌词开关，不用再配置 root 白名单。\n三、安装 ColorOS Live Lyrics Bridge 之后才有逐字与翻译按钮。</string>
+
+    <string name="action_bind">重新向 Bridge 声明绑定</string>
+    <string name="action_open_host">打开音理音理</string>
+    <string name="action_bind_done">已发送绑定广播</string>
+    <string name="action_bind_missing">Bridge 未安装</string>
+    <string name="action_host_missing">音理音理未安装</string>
+    <string name="footer">猫羽bot ・ 仅作用于 moe.ouom.neriplayer</string>
+</resources>
