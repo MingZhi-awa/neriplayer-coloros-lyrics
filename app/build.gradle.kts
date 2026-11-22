@@ -14,8 +14,23 @@ android {
         versionName = "1.0.0"
     }
 
+    // A committed debug keystore keeps CI signatures stable so a new build can update the old
+    // one in place. It is a debug-only key, never used for a store release.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("keystore/debug.jks")
+            storePassword = "neriplayer-coloros-lyrics"
+            keyAlias = "neriplayerlyrics"
+            keyPassword = "neriplayer-coloros-lyrics"
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
+            signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
